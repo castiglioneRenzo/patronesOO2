@@ -1,0 +1,14 @@
+package ar.edu.unlp.info.oo2.ejercicio_7;
+
+public class Paused extends ToDoItemState{
+	public void start(ToDoItem context) {
+		//do nothing
+	}
+	public void togglePause(ToDoItem context) {
+		context.setState(new InProgress());
+	}
+	public void finish(ToDoItem context) {
+		context.setState(new Finished());
+	}
+
+}

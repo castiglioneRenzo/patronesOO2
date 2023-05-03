@@ -1,0 +1,19 @@
+package ar.edu.unlp.info.oo2.ejercicio_7;
+
+import java.time.Duration;
+
+public abstract class ToDoItemState {
+	public void start(ToDoItem context) {
+		
+	}
+	public void togglePause(ToDoItem context) {
+		
+	}
+	public void finish(ToDoItem context) {
+		
+	}
+	
+	public abstract Duration workedTime(Instant startTime);
+	
+
+}

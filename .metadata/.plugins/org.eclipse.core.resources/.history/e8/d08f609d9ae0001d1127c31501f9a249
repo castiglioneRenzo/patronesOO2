@@ -1,0 +1,14 @@
+package ar.edu.info.unlp.ejercicio_6;
+
+public class Pasante {
+	private int cantExamenes;
+
+	public int getCantExamenes() {
+		return cantExamenes;
+	}
+
+	public void setCantExamenes(int cantExamenes) {
+		this.cantExamenes = cantExamenes;
+	}
+	
+}

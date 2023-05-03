@@ -1,0 +1,31 @@
+package ar.edu.info.unlp.ejercicio_6;
+
+public class Planta extends Empleado{
+	private boolean casado;
+	private int cantHijos;
+	private int antiguedad;
+	
+	public boolean isCasado() {
+		return casado;
+	}
+	public void setCasado(boolean casado) {
+		this.casado = casado;
+	}
+	public int getCantHijos() {
+		return cantHijos;
+	}
+	public void setCantHijos(int cantHijos) {
+		this.cantHijos = cantHijos;
+	}
+	public int getAntiguedad() {
+		return antiguedad;
+	}
+	public void setAntiguedad(int antiguedad) {
+		this.antiguedad = antiguedad;
+	}
+	public double sueldo() {
+		return 0;
+	}
+	
+	
+}

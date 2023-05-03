@@ -1,0 +1,28 @@
+package ar.edu.info.unlp.ejercicio_6;
+
+public class Temporario {
+	private int horasTrabajadas;
+	private int cantHijos;
+	private boolean casado;
+	public int getHorasTrabajadas() {
+		return horasTrabajadas;
+	}
+	public void setHorasTrabajadas(int horasTrabajadas) {
+		this.horasTrabajadas = horasTrabajadas;
+	}
+	public int getCantHijos() {
+		return cantHijos;
+	}
+	public void setCantHijos(int cantHijos) {
+		this.cantHijos = cantHijos;
+	}
+	public boolean isCasado() {
+		return casado;
+	}
+	public void setCasado(boolean casado) {
+		this.casado = casado;
+	}
+	
+	
+
+}

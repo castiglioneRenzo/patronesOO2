@@ -1,0 +1,14 @@
+package ar.edu.unlp.info.oo2.ejercicio_7;
+
+import java.time.Duration;
+import java.time.Instant;
+
+public class Finished extends ToDoItemState {
+	private Instant finishTime;
+	public Finished() {
+		this.finishTime = Instant.now(); 
+	}
+	public Duration workedTime(Instant startTime) {
+		return Duration.between(startTime, finishTime);
+	}
+}
