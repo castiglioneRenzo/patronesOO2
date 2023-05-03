@@ -1570,3 +1570,4 @@
 2023-04-23 17:29:59,136 [Worker-151: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Renzo\Documents\Eclipse\OO2\ejercicio_6\src\main\resources
 2023-04-23 17:29:59,139 [Worker-151: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
 2023-04-23 17:29:59,139 [Worker-151: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\Renzo\Documents\Eclipse\OO2\ejercicio_6\src\test\resources
+2023-05-03 16:58:29,954 [Worker-2: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
