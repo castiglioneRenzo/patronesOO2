@@ -1,5 +1,5 @@
 package ar.edu.info.unlp.ejercicio_6;
-
+//pattern used template method
 public abstract class Empleado {
 	private String nombre;
 	private String apellido;

@@ -1,5 +1,5 @@
 package ar.edu.unlp.info.oo2.ejercicio_7;
-
+//pattern used: State
 import java.util.ArrayList;
 import java.util.List;
 import java.time.Duration;
