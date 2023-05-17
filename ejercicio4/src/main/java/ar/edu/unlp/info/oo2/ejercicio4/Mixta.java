@@ -27,12 +27,29 @@ public class Mixta extends Topografia{
 		return 0;
 	}
 	
-	public boolean igual() {
+	public List<Topografia> getPartes(){
+		return this.partes;
+	}
+	
+	public boolean igual(Topografia t) {
 		/*  comparar igualdad entre topografías. Dos topografías son iguales si 
 			tienen exactamente la misma composición. Es decir, son iguales las 
 			proporciones de agua y tierra, y además, para aquellas que son mixtas, 
 			la disposición de sus partes es igual
 		*/
-		return false;
+		try
+		{
+			Mixta top = (Mixta) t;
+			for(int i=0; i<4; i++) {
+				if(! this.partes.get(i).igual(top.getPartes().get(i))) {
+					return false;
+				}
+			}
+		}
+		catch(Exception e)
+		{
+			return false;
+		}
+		return true;
 	}
 }

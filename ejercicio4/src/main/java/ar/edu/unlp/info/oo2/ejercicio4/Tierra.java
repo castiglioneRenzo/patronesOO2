@@ -10,12 +10,14 @@ public class Tierra extends Topografia{
 		return 1;
 	}
 	
-	public boolean igual() {
+	public boolean igual(Topografia t) {
 		/*  comparar igualdad entre topografías. Dos topografías son iguales si 
 			tienen exactamente la misma composición. Es decir, son iguales las 
 			proporciones de agua y tierra, y además, para aquellas que son mixtas, 
 			la disposición de sus partes es igual
 		*/
+		if(t.proporcionDeTierra() == 1)
+			return true;
 		return false;
 	}
 }

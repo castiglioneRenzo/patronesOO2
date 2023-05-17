@@ -5,5 +5,5 @@ public abstract class Topografia {
 	
 	public abstract double proporcionDeTierra();
 	
-	public abstract boolean igual();	
+	public abstract boolean igual(Topografia t);	
 }

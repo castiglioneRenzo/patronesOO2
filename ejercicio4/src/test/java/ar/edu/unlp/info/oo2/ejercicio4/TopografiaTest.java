@@ -56,5 +56,33 @@ class TopografiaTest {
 		top = new Mixta(l);
 		assertEquals(0.8125, top.proporcionDeAgua());
 	}
-
+	
+	@DisplayName("Igual")
+	@Test
+	void testIgual() {
+		List<Topografia> l = new ArrayList<Topografia>();		
+		l.add(tierra);		
+		l.add(tierra);
+		l.add(tierra);
+		l.add(agua);
+		Mixta mixta = new Mixta(l);
+		l = new ArrayList<Topografia>();		
+		l.add(agua);
+		l.add(agua);
+		l.add(agua);
+		l.add(mixta);
+		top = new Mixta(l);
+		assertEquals(false, top.igual(agua));
+		assertEquals(false, top.igual(tierra));
+		assertEquals(false, top.igual(mixta));
+		Topografia t = new Mixta(l);
+		assertEquals(true, top.igual(t));
+		l = new ArrayList<Topografia>();		
+		l.add(agua);
+		l.add(tierra);
+		l.add(agua);
+		l.add(mixta);
+		t = new Mixta(l);
+		assertEquals(false, top.igual(t));
+	}
 }
