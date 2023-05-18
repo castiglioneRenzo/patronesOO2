@@ -1,0 +1,48 @@
+@startuml
+!theme vibrant
+
+skin rose
+
+title Classes - Class Diagram
+
+
+class ProductoFinanciero {
+  -fechaOperacion: Date
+  +<<abstract>>ganancia(montoInicial Real): Real
+}
+
+class CompraDolares {
+  -valorCompra: Real
+  +ganancia(montoInicial: Real): Real
+}
+
+class CompraPesos{
+  -valorCompra: Real
+  +ganancia(montoInicial: Real): Real
+}
+
+class PlazoFijo{
+  -cantidadDias: Integer
+  -interes: Real
+  +ganancia(montoInicial: Real): Real
+}
+
+class PlazoFijoRenovable{
+  -cantidadDias: Integer
+  -interes: Real
+  +ganancia(montoInicial: Real): Real
+}
+
+class ProductoCombinado{
+  +ganancia(montoInicial: Real): Real
+}
+
+ProductoFinanciero <|-- CompraDolares
+ProductoFinanciero <|-- CompraPesos
+ProductoFinanciero <|-- PlazoFijo
+ProductoFinanciero <|-- PlazoFijoRenovable
+ProductoFinanciero <|-- ProductoCombinado
+ProductoFinanciero "1..*" *-- ProductoCombinado
+
+
+@enduml
