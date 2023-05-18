@@ -39,10 +39,27 @@ class ProductoCombinado{
 }
 
 class Director{
+	-builder: Builder
+	+Director(builer: Builder)
+	+setBuilder(builder: Builder): void
+	+make(type: String): void
 }
 interface Builder{
+	nuevoProductoCombinado(): void
+	nuevaCompraDolares(valorCompra: double): void
+	nuevaCompraPesos(valorCompra: double): void
+	nuevoPlazoFijo(cantDias: int, interes: double): void
+	nuevoPlazoFijoRenovable(cantDias: int, interes: double): void
 }
 class ProductoCombinadoBuilder{
+	-productoCombinado: ProductoCombinado
+	-productos: List<ProductoFinanciero>
+	+nuevoProductoCombinado(): void
+	+nuevaCompraDolares(valorCompra: double): void
+	+nuevaCompraPesos(valorCompra: double): void
+	+nuevoPlazoFijo(cantDias: int, interes: double): void
+	+nuevoPlazoFijoRenovable(cantDias: int, interes: double): void
+	+getResult(): ProductoCombinado
 }
 
 Builder <|.. ProductoCombinadoBuilder

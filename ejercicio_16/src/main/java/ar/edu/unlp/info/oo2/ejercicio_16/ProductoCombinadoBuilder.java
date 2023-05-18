@@ -11,20 +11,20 @@ public class ProductoCombinadoBuilder implements Builder {
 	}
 	
 	/** steps */
-	public void nuevaCompraDolares() {
-		//productos.add(p);
+	public void nuevaCompraDolares(double valorCompra) {
+		productos.add(new CompraDolares(valorCompra));
 	}
 	
-	public void nuevaCompraPesos() {
-		//productos.add(p);
+	public void nuevaCompraPesos(double valorCompra) {
+		productos.add(new CompraPesos(valorCompra));
 	}
 	
-	public void nuevoPlazoFijo() {
-		//productos.add(p);
+	public void nuevoPlazoFijo(int cantDias, double interes) {
+		productos.add(new PlazoFijo(cantDias, interes));
 	}
 	
-	public void nuevoPlazoFijoRenovable() {
-		//productos.add(p);	
+	public void nuevoPlazoFijoRenovable(int cantDias, double interes) {
+		productos.add(new PlazoFijoRenovable(cantDias, interes));	
 	}
 	/** end steps */
 	

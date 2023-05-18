@@ -2,8 +2,8 @@ package ar.edu.unlp.info.oo2.ejercicio_16;
 
 public interface Builder {
 	public void nuevoProductoCombinado();
-	public void nuevaCompraDolares();
-	public void nuevaCompraPesos();
-	public void nuevoPlazoFijo();
-	public void nuevoPlazoFijoRenovable();
+	public void nuevaCompraDolares(double valorCompra);
+	public void nuevaCompraPesos(double valorCompra);
+	public void nuevoPlazoFijo(int cantDias, double interes);
+	public void nuevoPlazoFijoRenovable(int cantDias, double interes);
 }
