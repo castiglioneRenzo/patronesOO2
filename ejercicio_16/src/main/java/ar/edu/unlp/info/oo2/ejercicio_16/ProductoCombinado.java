@@ -11,7 +11,9 @@ public class ProductoCombinado extends ProductoFinanciero{
 	}
 	
 	public double ganancia(double montoInicial) {
-		return 0;
+		var gananciaAux = new Object(){double value = montoInicial;};		
+		productos.stream().forEachOrdered(producto -> {gananciaAux.value += producto.ganancia(gananciaAux.value);});
+		return gananciaAux.value;
 	}
 
 	public List<ProductoFinanciero> getProductos() {

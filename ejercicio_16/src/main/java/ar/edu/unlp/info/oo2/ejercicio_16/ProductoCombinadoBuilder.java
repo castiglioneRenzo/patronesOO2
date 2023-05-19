@@ -1,13 +1,18 @@
 package ar.edu.unlp.info.oo2.ejercicio_16;
 
 import java.util.List;
+import java.util.ArrayList;
 
 public class ProductoCombinadoBuilder implements Builder {
 	private ProductoCombinado productoCombinado;
 	private List<ProductoFinanciero> productos;
 	
-	public void nuevoProductoCombinado() {
-		
+	public ProductoCombinadoBuilder() {
+		reset();
+	}
+	
+	private void nuevoProductoCombinado() {
+		this.productoCombinado = new ProductoCombinado(this.productos);
 	}
 	
 	/** steps */
@@ -28,8 +33,14 @@ public class ProductoCombinadoBuilder implements Builder {
 	}
 	/** end steps */
 	
+	public void reset() {
+		this.productoCombinado = null;
+		this.productos = new ArrayList<ProductoFinanciero>();
+	}
+	
 	// getResult()
 	public ProductoCombinado getResult() {
+		nuevoProductoCombinado();		
 		return this.productoCombinado;
 	}
 }

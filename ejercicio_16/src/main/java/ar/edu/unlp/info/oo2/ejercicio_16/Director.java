@@ -3,7 +3,7 @@ package ar.edu.unlp.info.oo2.ejercicio_16;
 public class Director {
 	private Builder builder;
 	
-	public Director(Builder builer) {
+	public Director(Builder builder) {
 		this.builder = builder;
 	}
 	
