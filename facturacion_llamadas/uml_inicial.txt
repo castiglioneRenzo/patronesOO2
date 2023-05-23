@@ -1,0 +1,65 @@
+@startuml
+class Llamada [[java:ar.edu.unlp.info.oo2.facturacion_llamadas.Llamada]] {
+	#tipoDeLlamada: String
+	-emisor: String
+	-remitente: String
+	+dur: int
+	+Llamada()
+	+Llamada(s: String, p: String, p2: String, p3: Persoona, dur: int)
+	+getTipoDeLlamada(): String
+	+setTipoDeLlamada(tipoDeLlamada: String): void
+	+setEmisor(q: String): void
+	+getRemitente(): String
+	+setRemitente(remitente: String): void
+}
+class Persoonal [[java:ar.edu.unlp.info.oo2.facturacion_llamadas.Persoonal]] {
+	~{static} descuentoJur: double
+	~{static} descuentoFis: double
+	+agregarTelefono(str: String): boolean
+	+registrarUsuario(data: String, nombre: String, t: String): Persoona
+	+eliminarUsuario(p: Persoona): boolean
+	+registrarLlamada(q: Persoona, q2: Persoona, t: String, d: int): Llamada
+	+calcularMontoTotalLlamadas(p: Persoona): double
+	+cantidadDeUsuarios(): int
+	+existeUsuario(persona: Persoona): boolean
+}
+class Persoona {
+}
+Persoonal --> "*" Persoona : lista1
+class Llamada {
+}
+Persoonal --> "*" Llamada : lista2
+class GuiaTelefonica {
+}
+Persoonal --> "1" GuiaTelefonica : lista3
+class GuiaTelefonica [[java:ar.edu.unlp.info.oo2.facturacion_llamadas.GuiaTelefonica]] {
+	+guia: SortedSet<String>
+}
+class Persoona [[java:ar.edu.unlp.info.oo2.facturacion_llamadas.Persoona]] {
+	+t: String
+	+nya: String
+	+tel: String
+	+cuit: String
+	+doc: String
+	+setLista1(lista1: List<Llamada>): void
+	+getT(): String
+	+setT(t: String): void
+	+getNya(): String
+	+setNya(nya: String): void
+	+getTel(): String
+	+setTel(tel: String): void
+	+getCuit(): String
+	+setCuit(cuit: String): void
+	+getDoc(): String
+	+setDoc(doc: String): void
+}
+class Llamada {
+}
+Persoona --> "*" Llamada : lista1
+class Persoonal {
+}
+Persoona --> "1" Persoonal : sis
+class Llamada {
+}
+Persoona --> "*" Llamada : getLista1()
+@enduml

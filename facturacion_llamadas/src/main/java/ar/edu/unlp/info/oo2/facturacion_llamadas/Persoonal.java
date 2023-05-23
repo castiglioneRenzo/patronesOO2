@@ -5,55 +5,46 @@ import java.util.List;
 import java.util.stream.Collectors;
 //clase dios. El nombre de la clase se confunde con la clase Persona
 public class Persoonal {//nombres de variables no descriptivos
-	List<Persoona> lista1 = new ArrayList<Persoona>();//--v
-	List<Llamada> lista2 = new ArrayList<Llamada>();//--v
-	GuiaTelefonica lista3 = new GuiaTelefonica();//acoplamiento
+	List<Persoona> personas = new ArrayList<Persoona>();//--v
+	List<Llamada> llamadas = new ArrayList<Llamada>();//--v
+	GuiaTelefonica guiaTelefonica = new GuiaTelefonica();// Nombre no descriptivo
 	static double descuentoJur = 0.15;
 	static double descuentoFis = 0;
 	
-	public boolean agregarTelefono(String str) {//feature envy. deberia estar en guia telefonica ( ref. extract method)
-		boolean encontre = lista3.guia.contains(str);
-		if (!encontre) {
-			lista3.guia.add(str);
-			encontre= true;
-			return encontre;
-		}
-		else {
-			encontre= false;
-			return encontre;//encontre, no se si es un bloat, pero alarga y entorpece el metodo
-		}
+	public boolean agregarTelefono(String numero) {
+		return guiaTelefonica.agregarTelefono(numero);
 	}
 	
 	public Persoona registrarUsuario(String data, String nombre, String t) {
 		Persoona var = new Persoona();
-		if (t.equals("fisica")) {
+		if (t.equals("fisica")) {	//Deberian ser subclases de llamada. Replace Type Code with Subclasses
 			var.setNya(nombre);
-			String tel = lista3.guia.last();
-			lista3.guia.remove(tel);
+			String tel = guiaTelefonica.getLast();
+			guiaTelefonica.eliminar(tel);
 			var.setT(t);
 			var.setTel(tel);
 			var.setDoc(data);
 		}
 		else if (t.equals("juridica")) {
-			String tel = lista3.guia.last();
-			lista3.guia.remove(tel);
+			String tel = guiaTelefonica.getLast();
+			guiaTelefonica.eliminar(tel);
 			var.nya =nombre;
 			var.t =t;
 			var.tel = tel;
 			var.cuit =data;
 		}
 		var.sis = this;
-		lista1.add(var);
+		personas.add(var);
 		return var;
 		
 	}
 	
 	public boolean eliminarUsuario(Persoona p) {
-		List<Persoona> l = p.sis.lista1.stream().filter(persona -> persona != p).collect(Collectors.toList());
+		List<Persoona> l = p.sis.personas.stream().filter(persona -> persona != p).collect(Collectors.toList());
 		boolean borre = false;
-		if (l.size() < lista1.size()) {
-			this.lista1 = l;
-			this.lista3.guia.add(p.getTel());
+		if (l.size() < personas.size()) {
+			this.personas = l;
+			this.guiaTelefonica.agregarTelefono(p.getTel());
 			borre = true;
 		}
 		return borre;
@@ -66,7 +57,7 @@ public class Persoonal {//nombres de variables no descriptivos
 		x.setEmisor(q.tel);
 		x.setRemitente(q2.getTel());
 		x.dur= d;
-		lista2.add(x);
+		llamadas.add(x);
 		q.lista1.add(x);
 		return x;
 		
@@ -75,7 +66,7 @@ public class Persoonal {//nombres de variables no descriptivos
 	public double calcularMontoTotalLlamadas(Persoona p) {//feature envy. deberia estar en llamada (ref. extract method)
 		double c = 0;
 		Persoona aux = null;
-		for (Persoona pp : lista1) {
+		for (Persoona pp : personas) {
 			if (pp.tel == p.getTel()) {
 				aux = pp;
 				break;
@@ -102,11 +93,11 @@ public class Persoonal {//nombres de variables no descriptivos
 	}
 
 	public int cantidadDeUsuarios() {
-		return lista1.size();
+		return personas.size();
 	}
 
 	public boolean existeUsuario(Persoona persona) {
-		return lista1.contains(persona);
+		return personas.contains(persona);
 	}
 	
 }
