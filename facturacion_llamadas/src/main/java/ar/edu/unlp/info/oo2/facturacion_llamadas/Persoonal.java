@@ -4,47 +4,29 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 //clase dios. El nombre de la clase se confunde con la clase Persona
-public class Persoonal {//nombres de variables no descriptivos
-	List<Persoona> personas = new ArrayList<Persoona>();//--v
-	List<Llamada> llamadas = new ArrayList<Llamada>();//--v
-	GuiaTelefonica guiaTelefonica = new GuiaTelefonica();// Nombre no descriptivo
-	static double descuentoJur = 0.15;
-	static double descuentoFis = 0;
-	
+public class Persoonal {
+	List<Persoona> personas = new ArrayList<Persoona>();
+	List<Llamada> llamadas = new ArrayList<Llamada>();
+	GuiaTelefonica guiaTelefonica = new GuiaTelefonica();
 	public boolean agregarTelefono(String numero) {
 		return guiaTelefonica.agregarTelefono(numero);
 	}
 	
 	public Persoona registrarUsuario(String data, String nombre, String t) {
-		Persoona var = new Persoona();
-		if (t.equals("fisica")) {	//Deberian ser subclases de llamada. Replace Type Code with Subclasses
-			var.setNya(nombre);
-			String tel = guiaTelefonica.getLast();
-			guiaTelefonica.eliminar(tel);
-			var.setT(t);
-			var.setTel(tel);
-			var.setDoc(data);
-		}
-		else if (t.equals("juridica")) {
-			String tel = guiaTelefonica.getLast();
-			guiaTelefonica.eliminar(tel);
-			var.nya =nombre;
-			var.t =t;
-			var.tel = tel;
-			var.cuit =data;
-		}
-		var.sis = this;
-		personas.add(var);
-		return var;
-		
+		String tel = guiaTelefonica.getLast();
+		Persoona persona= Persoona.nuevo(data, nombre, t, tel);
+		guiaTelefonica.eliminar(tel);
+		persona.setSistema(this);
+		personas.add(persona);
+		return persona;		
 	}
 	
 	public boolean eliminarUsuario(Persoona p) {
-		List<Persoona> l = p.sis.personas.stream().filter(persona -> persona != p).collect(Collectors.toList());
+		List<Persoona> l = p.getSistema().personas.stream().filter(persona -> persona != p).collect(Collectors.toList());
 		boolean borre = false;
 		if (l.size() < personas.size()) {
 			this.personas = l;
-			this.guiaTelefonica.agregarTelefono(p.getTel());
+			this.guiaTelefonica.agregarTelefono(p.getTelefono());
 			borre = true;
 		}
 		return borre;
@@ -54,38 +36,33 @@ public class Persoonal {//nombres de variables no descriptivos
 	public Llamada registrarLlamada(Persoona q, Persoona q2, String t, int d) {// nombres de parametros poco descriptivos
 		Llamada x = new Llamada();
 		x.tipoDeLlamada = t;
-		x.setEmisor(q.tel);
-		x.setRemitente(q2.getTel());
+		x.setEmisor(q.getTelefono());
+		x.setRemitente(q2.getTelefono());
 		x.dur= d;
 		llamadas.add(x);
-		q.lista1.add(x);
+		q.getLlamadas().add(x);
 		return x;
 		
 	}
 	
-	public double calcularMontoTotalLlamadas(Persoona p) {//feature envy. deberia estar en llamada (ref. extract method)
+	public double calcularMontoTotalLlamadas(Persoona p) {// exceso de condicionales. No se aplica polimorfismo
 		double c = 0;
 		Persoona aux = null;
 		for (Persoona pp : personas) {
-			if (pp.tel == p.getTel()) {
+			if (pp.getTelefono() == p.getTelefono()) {
 				aux = pp;
 				break;
 			}
 		} if (aux == null) return c;
 		if (aux != null) {
-			for (Llamada l : aux.lista1) {
+			for (Llamada l : aux.getLlamadas()) {
 				double auxc = 0;
 				if (l.tipoDeLlamada == "nacional") {
 					auxc += l.dur *3 + (l.dur*3*0.21);
 				} else if (l.tipoDeLlamada == "internacional") {
 					auxc += l.dur *200 + (l.dur*200*0.21);
-				}
-				
-				if (aux.t == "fisica") {
-					auxc -= auxc*descuentoFis;
-				} else if(aux.t == "juridica") {
-					auxc -= auxc*descuentoJur;
-				}
+				}							
+				auxc -= auxc*aux.getDescuento();				
 				c += auxc;
 			}
 		}
