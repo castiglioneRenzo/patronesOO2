@@ -16,13 +16,13 @@ public class Persoonal {
 		String tel = guiaTelefonica.getLast();
 		Persoona persona= Persoona.nuevo(data, nombre, t, tel);
 		guiaTelefonica.eliminar(tel);
-		persona.setSistema(this);
+		//persona.setSistema(this);
 		personas.add(persona);
 		return persona;		
 	}
 	
 	public boolean eliminarUsuario(Persoona p) {
-		List<Persoona> l = p.getSistema().personas.stream().filter(persona -> persona != p).collect(Collectors.toList());
+		List<Persoona> l = this.personas.stream().filter(persona -> persona != p).collect(Collectors.toList());
 		boolean borre = false;
 		if (l.size() < personas.size()) {
 			this.personas = l;
