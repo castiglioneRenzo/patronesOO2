@@ -9,13 +9,6 @@ public abstract class Persoona {
 	private String telefono;	
 	private Persoonal sistema;//acoplamiento con clase Persoonal (Sistema)
 	
-
-	public Persoona() {}
-	
-	private Persoona(String data, String nombre, String tipo, String telefono) {
-		this.nombreYApellido = nombre;
-		this.telefono = telefono;
-	}
 	public static Persoona nuevo(String data, String nombre, String tipo, String telefono) {
 		switch (tipo) {
 		case "fisica":
@@ -26,8 +19,6 @@ public abstract class Persoona {
 			return null;
 		}
 	}
-	
-	
 	
 	public List<Llamada> getLlamadas() {
 		return llamadas;

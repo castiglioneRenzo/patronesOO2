@@ -1,36 +1,45 @@
 package ar.edu.unlp.info.oo2.facturacion_llamadas;
 
-public class Llamada {
-	protected String tipoDeLlamada;
+public abstract class Llamada {
 	private String emisor;
 	private String remitente;
-	public int dur;//rompe el encapsulamiento, deberia ser privado (ref. generate accessors)
+	private int dur;
 	
-	public Llamada() {
-		
+	public Llamada(String emisor, String remitente, int duracion) {
+		this.setEmisor(emisor);
+		this.setRemitente(remitente);
+		this.setDur(duracion);		
 	}
-	public Llamada(String s, String p, String p2, Persoona p3, int dur) {//los nombres de los parámetros no son descriptivos
-		this.tipoDeLlamada = s;
-		this.emisor= p;
-		this.remitente= p2;
-		this.dur = dur;
+	public static Llamada nuevo(String tipoDeLlamada, String emisor, String remitente, int duracion) {
+		switch (tipoDeLlamada) {
+		case "nacional":
+			return new LlamadaNacional(emisor, remitente, duracion);
+		case "internacional":
+			return new LlamadaInternacional(emisor, remitente, duracion);
+		default: 
+			return null;
+		} 
 	}
 
-	public String getTipoDeLlamada() {
-		return tipoDeLlamada;
+	public String getEmisor() {
+		return this.emisor;
 	}
-
-	public void setTipoDeLlamada(String tipoDeLlamada) {
-		this.tipoDeLlamada = tipoDeLlamada;
-	}
-	public void setEmisor(String q) {
-		emisor = q;
+	public void setEmisor(String emisor) {
+		this.emisor = emisor;
 	}
 	public String getRemitente() {
 		return remitente;
 	}
 	public void setRemitente(String remitente) {
 		this.remitente = remitente;
+	}
+	public abstract double calcularCosto();
+	
+	public int getDur() {
+		return dur;
+	}
+	public void setDur(int dur) {
+		this.dur = dur;
 	}
 	
 	

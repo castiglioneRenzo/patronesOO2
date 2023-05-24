@@ -3,7 +3,7 @@ package ar.edu.unlp.info.oo2.facturacion_llamadas;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-//clase dios. El nombre de la clase se confunde con la clase Persona
+
 public class Persoonal {
 	List<Persoona> personas = new ArrayList<Persoona>();
 	List<Llamada> llamadas = new ArrayList<Llamada>();
@@ -33,19 +33,15 @@ public class Persoonal {
 		
 	}
 	
-	public Llamada registrarLlamada(Persoona q, Persoona q2, String t, int d) {// nombres de parametros poco descriptivos
-		Llamada x = new Llamada();
-		x.tipoDeLlamada = t;
-		x.setEmisor(q.getTelefono());
-		x.setRemitente(q2.getTelefono());
-		x.dur= d;
-		llamadas.add(x);
-		q.getLlamadas().add(x);
-		return x;
+	public Llamada registrarLlamada(Persoona emisor, Persoona remitente, String tipo, int duracion) {
+		Llamada llamada = Llamada.nuevo(tipo, emisor.getTelefono(), remitente.getTelefono(), duracion);		
+		llamadas.add(llamada);
+		emisor.getLlamadas().add(llamada);
+		return llamada;
 		
 	}
 	
-	public double calcularMontoTotalLlamadas(Persoona p) {// exceso de condicionales. No se aplica polimorfismo
+	public double calcularMontoTotalLlamadas(Persoona p) {
 		double c = 0;
 		Persoona aux = null;
 		for (Persoona pp : personas) {
@@ -56,17 +52,13 @@ public class Persoonal {
 		} if (aux == null) return c;
 		if (aux != null) {
 			for (Llamada l : aux.getLlamadas()) {
-				double auxc = 0;
-				if (l.tipoDeLlamada == "nacional") {
-					auxc += l.dur *3 + (l.dur*3*0.21);
-				} else if (l.tipoDeLlamada == "internacional") {
-					auxc += l.dur *200 + (l.dur*200*0.21);
-				}							
+				double auxc = 0;				
+				auxc += l.calcularCosto();										
 				auxc -= auxc*aux.getDescuento();				
 				c += auxc;
 			}
 		}
-		return c;//exceso de condicionales Switch Statements. Long method.
+		return c;
 	}
 
 	public int cantidadDeUsuarios() {
