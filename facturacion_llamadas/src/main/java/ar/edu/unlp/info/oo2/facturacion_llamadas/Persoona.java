@@ -6,8 +6,7 @@ import java.util.List;
 public abstract class Persoona {
 	private List<Llamada> llamadas = new ArrayList<Llamada>();
 	private String nombreYApellido;
-	private String telefono;	
-	private Persoonal sistema;//acoplamiento con clase Persoonal (Sistema)
+	private String telefono;
 	
 	public static Persoona nuevo(String data, String nombre, String tipo, String telefono) {
 		switch (tipo) {
@@ -37,12 +36,6 @@ public abstract class Persoona {
 	}
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
-	}
-	public Persoonal getSistema() {
-		return sistema;
-	}
-	public void setSistema(Persoonal sistema) {
-		this.sistema = sistema;
 	}
 	public abstract double getDescuento();
 }

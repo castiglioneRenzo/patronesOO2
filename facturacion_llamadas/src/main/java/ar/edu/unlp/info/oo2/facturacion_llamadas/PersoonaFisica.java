@@ -1,7 +1,7 @@
 package ar.edu.unlp.info.oo2.facturacion_llamadas;
 
 public class PersoonaFisica extends Persoona {	
-	public String documento;
+	private String documento;
 	static double descuento = 0;
 	
 	public PersoonaFisica(String data, String nombre, String telefono) {

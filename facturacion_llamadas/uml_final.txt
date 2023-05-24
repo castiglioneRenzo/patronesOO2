@@ -1,0 +1,88 @@
+@startuml
+
+abstract class Llamada [[java:ar.edu.unlp.info.oo2.facturacion_llamadas.Llamada]] {
+	-emisor: String
+	-remitente: String
+	-dur: int
+	+Llamada(emisor: String, remitente: String, duracion: int)
+	+{static} nuevo(tipoDeLlamada: String, emisor: String, remitente: String, duracion: int): Llamada
+	+getEmisor(): String
+	+setEmisor(emisor: String): void
+	+getRemitente(): String
+	+setRemitente(remitente: String): void
+	+{abstract} calcularCosto(): double
+	+getDur(): int
+	+setDur(dur: int): void
+}
+
+class LlamadaInternacional [[java:ar.edu.unlp.info.oo2.facturacion_llamadas.LlamadaInternacional]] {
+	+LlamadaInternacional(emisor: String, remitente: String, duracion: int)
+	+calcularCosto(): double
+}
+
+class LlamadaNacional [[java:ar.edu.unlp.info.oo2.facturacion_llamadas.LlamadaNacional]] {
+	+LlamadaNacional(emisor: String, remitente: String, duracion: int)
+	+calcularCosto(): double
+}
+
+
+class Persoonal [[java:ar.edu.unlp.info.oo2.facturacion_llamadas.Persoonal]] {
+	+agregarTelefono(numero: String): boolean
+	+registrarUsuario(data: String, nombre: String, t: String): Persoona
+	+eliminarUsuario(p: Persoona): boolean
+	+registrarLlamada(emisor: Persoona, remitente: Persoona, tipo: String, duracion: int): Llamada
+	+calcularMontoTotalLlamadas(p: Persoona): double
+	+cantidadDeUsuarios(): int
+	+existeUsuario(persona: Persoona): boolean
+}
+Persoonal --> "*" Persoona : personas
+Persoonal --> "*" Llamada : llamadas
+Persoonal --> "1" GuiaTelefonica : guiaTelefonica
+
+
+abstract class Persoona [[java:ar.edu.unlp.info.oo2.facturacion_llamadas.Persoona]] {
+	-nombreYApellido: String
+	-telefono: String
+	+{static} nuevo(data: String, nombre: String, tipo: String, telefono: String): Persoona
+	+setLlamadas(lista1: List<Llamada>): void
+	+getNombreYApellido(): String
+	+setNombreYApellido(nombreYApellido: String): void
+	+getTelefono(): String
+	+setTelefono(telefono: String): void
+	+{abstract} getDescuento(): double
+}
+
+class PersoonaFisica [[java:ar.edu.unlp.info.oo2.facturacion_llamadas.PersoonaFisica]] {
+	-documento: String
+	~{static} descuento: double
+	+PersoonaFisica(data: String, nombre: String, telefono: String)
+	+getDocumento(): String
+	+getDescuento(): double
+}
+
+class PersoonaJuridica [[java:ar.edu.unlp.info.oo2.facturacion_llamadas.PersoonaJuridica]] {
+	-cuit: String
+	~{static} descuento: double
+	+PersoonaJuridica(data: String, nombre: String, telefono: String)
+	+getCuit(): String
+	+getDescuento(): double
+}
+
+class GuiaTelefonica [[java:ar.edu.unlp.info.oo2.facturacion_llamadas.GuiaTelefonica]] {
+	-guia: SortedSet<String>
+	+getGuia(): SortedSet<String>
+	+agregarTelefono(str: String): boolean
+	+getLast(): String
+	+eliminar(telefono: String): boolean
+}
+
+
+
+
+Persoona --> "*" Llamada : llamadas
+Persoona --> "*" Llamada : getLlamadas()
+Llamada <|-- LlamadaNacional
+Llamada <|-- LlamadaInternacional
+Persoona <|-- PersoonaFisica
+Persoona <|-- PersoonaJuridica
+@enduml
