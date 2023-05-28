@@ -1,0 +1,31 @@
+@startuml
+interface IArchivo{
+	+getNombre(): String
+	+getFechaDeCreacion(): LocalDate
+	+getTamano(): int
+	}
+class Archivo{
+	-nombre: String
+	-fechaDeCreacion: LocalDate
+	-tamano: int
+	+Archivo(String nombre, LocalDate fecha, int tamano)
+	+getNombre(): String
+	+getFechaDeCreacion(): LocalDate
+	+getTamano(): int
+}
+Archivo --|> IArchivo
+
+class Directorio{
+	-nombre: String
+	-fechaDeCreacion: LocalDate
+	+Directorio(String nombre, LocalDate fecha)
+	+tamanoTotalOcupado(): int
+	+getTamano(): int
+	+getNombre(): String
+	+getFechaDeCreacion(): LocalDate
+}
+Directorio --|> IArchivo
+Directorio --* "0..*" IArchivo
+Directorio --> "1" Archivo: archivoMasGrande()
+Directorio --> "1" Archivo: archivoMasNuevo()
+@enduml
