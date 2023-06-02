@@ -6,8 +6,23 @@ public class Dispositivo {
 	private Display display;
 	private Connection connection;
 	
+	public Dispositivo(CRC16_Calculator calculator, Connection connection) {
+		this.connection = connection;
+		this.crcCalculator = calculator;
+		this.ringer = new Ringer();
+		this.display = new Display();
+	}
+	
 	public String send(String data) {
 		long crc = this.crcCalculator.crcFor(data);
 		return this.connection.sendData(data, crc);
+	}
+	
+	public Display getDisplay() {
+		return this.display;
+	}
+	
+	public Connection getConnetcion() {
+		return this.connection;
 	}
 }
