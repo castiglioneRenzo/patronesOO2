@@ -1,0 +1,42 @@
+@startuml
+class Dispositivo{
+	+send(String data): String
+}
+
+
+class Ringer {
+	+ring(): void
+}
+Dispositivo --> "1" Ringer : ringer
+Dispositivo --> "1" Display : display
+Dispositivo --> "1" Connection : connection
+Dispositivo --> "1" CRC16_Calculator : crcCalculator
+
+class Display {
+	+showBanner(String img): String
+}
+
+
+class CRC16_Calculator {
+}
+
+class Ringer{
+}
+
+class WifiConn {
+	-pict: String
+	+sendData(data: String, crc: int): String
+	+pict(): String
+}
+
+interface Connection {
+	sendData(data: String, crc: int): String
+	pict(): String
+}
+Connection <|.. WifiConn
+
+class CRC16_Calculator{
+	+crcFor(String data): integer
+}
+
+@enduml
