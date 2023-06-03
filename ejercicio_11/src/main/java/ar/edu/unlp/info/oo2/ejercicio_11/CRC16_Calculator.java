@@ -1,6 +1,6 @@
 package ar.edu.unlp.info.oo2.ejercicio_11;
 
-public class CRC16_Calculator {
+public class CRC16_Calculator implements CRCCalculator {
 	public int crcFor(String data) {
 		int crc = 0xFFFF;
 		for (int j = 0; j < data.getBytes().length; j++) {

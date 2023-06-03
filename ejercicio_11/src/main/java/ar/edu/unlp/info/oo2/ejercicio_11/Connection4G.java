@@ -12,6 +12,6 @@ public class Connection4G {
 	}
 	
 	public String transmit(String data, long crc) {
-		return data + " cte: " + crc;
+		return data + " crc: " + crc;
 	}
 }

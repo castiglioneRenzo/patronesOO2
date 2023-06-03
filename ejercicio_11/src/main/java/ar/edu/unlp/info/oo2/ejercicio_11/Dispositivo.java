@@ -1,7 +1,7 @@
 package ar.edu.unlp.info.oo2.ejercicio_11;
 
 public class Dispositivo {
-	private CRC16_Calculator crcCalculator;
+	private CRCCalculator crcCalculator;
 	private Ringer ringer;
 	private Display display;
 	private Connection connection;
@@ -24,5 +24,15 @@ public class Dispositivo {
 	
 	public Connection getConnetcion() {
 		return this.connection;
+	}
+	
+	public void setConnection(Connection con) {
+		this.connection = con;
+		this.ringer.ring();
+		this.display.showBanner(this.connection.pict());
+	}
+	
+	public void setCalculator(CRCCalculator calc) {
+		this.crcCalculator = calc;
 	}
 }

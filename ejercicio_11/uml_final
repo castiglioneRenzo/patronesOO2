@@ -1,42 +1,77 @@
 @startuml
-class Dispositivo{
-	+send(String data): String
+class Dispositivo <<Client>> <<Navigator>>[[java:ar.edu.unlp.info.oo2.ejercicio_11.Dispositivo]] {
+	+Dispositivo(calculator: CRC16_Calculator, connection: Connection)
+	+send(data: String): String
+	+setConnection(con: Connection): void
+	+setCalculator(calc: CRCCalculator): void
 }
-
-
+class CRCCalculator {
+}
+Dispositivo --> "1" CRCCalculator : crcCalculator
 class Ringer {
-	+ring(): void
 }
 Dispositivo --> "1" Ringer : ringer
-Dispositivo --> "1" Display : display
-Dispositivo --> "1" Connection : connection
-Dispositivo --> "1" CRC16_Calculator : crcCalculator
-
 class Display {
-	+showBanner(String img): String
 }
-
-
-class CRC16_Calculator {
+Dispositivo --> "1" Display : display
+class Connection {
 }
-
-class Ringer{
+Dispositivo --> "1" Connection : connection
+class Display {
 }
-
-class WifiConn {
+Dispositivo --> "1" Display : getDisplay()
+class Connection {
+}
+Dispositivo --> "1" Connection : getConnetcion()
+class WifiConn <<Concrete Strategy>>[[java:ar.edu.unlp.info.oo2.ejercicio_11.WifiConn]] {
 	-pict: String
-	+sendData(data: String, crc: int): String
+	+WifiConn()
+	+sendData(data: String, crc: long): String
 	+pict(): String
 }
-
-interface Connection {
-	sendData(data: String, crc: int): String
-	pict(): String
+interface Connection <<Strategy>><<Client Interface>>{
 }
 Connection <|.. WifiConn
-
-class CRC16_Calculator{
-	+crcFor(String data): integer
+class CRC32_Calculator <<Concrete Strategy>> [[java:ar.edu.unlp.info.oo2.ejercicio_11.CRC32_Calculator]] {
+	+crcFor(data: String): int
 }
-
+interface CRCCalculator {
+}
+CRCCalculator <|.. CRC32_Calculator
+class Connection4GAdapter<<Concrete Strategy>><<Adapter>> [[java:ar.edu.unlp.info.oo2.ejercicio_11.Connection4GAdapter]] {
+	+Connection4GAdapter()
+	+sendData(data: String, crc: long): String
+	+pict(): String
+}
+class Connection4G <<Service>>{
+}
+Connection4GAdapter --> "1" Connection4G : con
+interface Connection {
+}
+Connection <|.. Connection4GAdapter
+class Ringer [[java:ar.edu.unlp.info.oo2.ejercicio_11.Ringer]] {
+	+ring(): void
+}
+interface Connection [[java:ar.edu.unlp.info.oo2.ejercicio_11.Connection]] {
+	sendData(data: String, crc: long): String
+	pict(): String
+}
+class Display [[java:ar.edu.unlp.info.oo2.ejercicio_11.Display]] {
+	+showBanner(img: String): String
+}
+class CRC16_Calculator <<Concrete Strategy>> [[java:ar.edu.unlp.info.oo2.ejercicio_11.CRC16_Calculator]] {
+	+crcFor(data: String): int
+}
+interface CRCCalculator <<Strategy>> {
+}
+CRCCalculator <|.. CRC16_Calculator
+class Connection4G [[java:ar.edu.unlp.info.oo2.ejercicio_11.Connection4G]] {
+	-symb: String
+	+Connection4G()
+	+symb(): String
+	+transmit(data: String, crc: long): String
+}
+interface CRCCalculator [[java:ar.edu.unlp.info.oo2.ejercicio_11.CRCCalculator]] {
+	crcFor(data: String): int
+}
 @enduml
