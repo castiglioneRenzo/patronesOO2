@@ -1,0 +1,30 @@
+@startuml
+class ProxyDB [[java:ar.edu.unlp.info.oo2.ejercicio_13.ProxyDB]] {
+	-logged: boolean
+	+ProxyDB()
+	+authenticate(passCode: String): boolean
+	+checkAccess(): boolean
+	+insertNewRow(rowData: List<String>): int
+	+getSearchResults(queryString: String): Collection<String>
+}
+class DatabaseAccess {
+}
+ProxyDB --> "1" DatabaseAccess : realService
+interface DatabaseAccess {
+}
+DatabaseAccess <|.. ProxyDB
+class DatabaseRealAccess [[java:ar.edu.unlp.info.oo2.ejercicio_13.DatabaseRealAccess]] {
+	-data: Map<String,List<String>>
+	-currentId: int
+	+DatabaseRealAccess()
+	+getSearchResults(queryString: String): Collection<String>
+	+insertNewRow(rowData: List<String>): int
+}
+interface DatabaseAccess {
+}
+DatabaseAccess <|.. DatabaseRealAccess
+interface DatabaseAccess [[java:ar.edu.unlp.info.oo2.ejercicio_13.DatabaseAccess]] {
+	insertNewRow(rowData: List<String>): int
+	getSearchResults(queryString: String): Collection<String>
+}
+@enduml
