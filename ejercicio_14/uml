@@ -1,0 +1,55 @@
+@startuml
+
+interface File{
+	+getNombre(): String
+	+getExtension(): String
+	+getFechaDeCreacion(): LocalDate
+	+getFechaDeModificacion(): LocalDate
+	+getPermisos(): List<String>
+	+getTamano(): double
+	+prettyPrint(): String
+}
+
+
+
+class FileOO2 [[java:ar.edu.unlp.info.oo2.ejercicio_14.FileOO2]] {
+	-nombre: String
+	-extension: String
+	-tamano: double
+	-fechaDeCreacion: LocalDate
+	-fechaDeModificacion: LocalDate
+	-permisos: List<String>
+	+getNombre(): String
+	+setNombre(nombre: String): void
+	+getExtension(): String
+	+setExtension(extension: String): void
+	+getFechaDeCreacion(): LocalDate
+	+setFechaDeCreacion(fechaDeCreacion: LocalDate): void
+	+getFechaDeModificacion(): LocalDate
+	+setFechaDeModificacion(fechaDeModificacion: LocalDate): void
+	+getPermisos(): List<String>
+	+setPermisos(permisos: List<String>): void
+	+getTamano(): double
+	+prettyPrint(): String
+}
+FileOO2 .u.|> File
+
+class FileDecorator{	
+	+getNombre(): String
+	+getExtension(): String
+	+getFechaDeCreacion(): LocalDate
+	+getFechaDeModificacion(): LocalDate
+	+getPermisos(): List<String>
+	+getTamano(): double	
+	+prettyPrint(): String
+}
+FileDecorator .u.|> File
+FileDecorator o-u-> "1" File : wrapee
+
+class FileDecoratorNombre{
+	...
+	+prettyPrint(): String
+}
+FileDecoratorNombre -u-|> FileDecorator
+
+@enduml
