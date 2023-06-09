@@ -11,7 +11,15 @@ public class ProxyDB implements DatabaseAccess {
 	
 	public ProxyDB() {
 		this.realService = new DatabaseRealAccess();
-		Logger.getLogger(ProxyDB.class.getName()).addHandler(new ConsoleHandler());
+		LogManager.getLogManager().reset();
+		ConsoleHandler handler = new ConsoleHandler();
+		handler.setFormatter(new JSONFormatter());			
+		handler.setLevel(Level.SEVERE);
+		Logger.getLogger(ProxyDB.class.getName()).addHandler(handler);
+		handler = new ConsoleHandler();
+		handler.setFormatter(new UpperFormatter());			
+		handler.setLevel(Level.INFO);
+		Logger.getLogger(ProxyDB.class.getName()).addHandler(handler);
 	}
 	
 	public boolean authenticate(String passCode) {
@@ -19,7 +27,9 @@ public class ProxyDB implements DatabaseAccess {
 			this.logged = true;			
 			return true;
 		}
-		Logger.getLogger(ProxyDB.class.getName()).log(Level.SEVERE, "Acceso Inválido");
+		else {
+			Logger.getLogger(ProxyDB.class.getName()).log(Level.SEVERE, "Acceso Inválido");
+		}
 		return false;
 	}
 	
